@@ -1,0 +1,32 @@
+npm i loadtest -g  atau npm i artillery -g
+cd 7-express-app-with-fab-series-clustering
+nodemon server.js
+
+
+cara run loadtest: 
+================ INFO ===============
+-n – Sets max number of requests
+-c – Concurrent requests
+-- rps  - number of requests per second
+=====================================
+loadtest -n 1000 -c 100 --rps 200 http://localhost:3000?number=10
+
+
+
+
+
+cara run artillery:
+================ INFO ===============
+quick – used for ad-hoc testing
+--count – used for creating virtual users
+-n – number of request per virtual user
+=====================================
+artillery quick --count 10 -n 20 http://localhost:3000?number=20
+
+
+
+
+
+
+
+loadtest -n 1000 -c 100 --rps 200 http://localhost:3000?number=10

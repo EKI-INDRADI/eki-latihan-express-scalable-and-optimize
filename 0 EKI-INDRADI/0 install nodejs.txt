@@ -1,0 +1,9 @@
+apt-get install curl
+curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
+sudo apt install nodejs
+
+node --version
+npm --version
+
+npm i nodemon -g
+npm i pm2 -g
