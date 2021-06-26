@@ -1,72 +1,64 @@
-# EKI RESEARCH & DEVELOPMENT
 
-"STILL RND"
+Q :
+At the beginning  of lecture 4 it seems that blocking and non-blocking operations have been mixed up.
+Network, file and database access are Non-blocking. Its presented the other way around
+Heavy math operations are blocking - ie running on cpu.
 
-# Referensi : 
+A :
 
-- Udemy - Pravinkumar Dabade 
+One of the design goal of Node JS is "No Function should directly perform IO operations". 
+Why? because all the operations gets executed in single execution stack. 
+That is why Node JS handles File IO, Network, Database kind of operations asynchronously. 
+In fact every operation in Node JS is by default async. For example, File System. 
+The readFile() method takes a call back function and readFileSync() is synchronous operation. 
+When you execute synchronous operation in stack, unless this operation is not completed, 
+it will never start with second operation.
 
-(https://www.udemy.com/course/node-js-cluster)
+In my lesson and example, I told that we have a synchronous function which will calculate the Fibonacci series. 
+If the number is small like 10,12, 13, the operation gets completed within no time. 
+But if we give higher number like 35, 40, 45, it takes lot of time in our execution stack to process this operation. 
+And by default Node JS makes usage of single core of our machine. So, it is long running operations will block the main thread. 
+This is where we need Node JS cluster.
+
+So, in short any mathematical operation, logic processing etc. are non-blocking operation. 
+But if  the operation is network, disk or database operation, then it will block the main thread. 
+And these operations takes millions of cycles to get completed.  
+That's why Node JS executes all the IO operations asynchronously.
+
+But, if we still execute the non-blocking operation which is CPU bound operation which takes long time to process, 
+then it will block the main thread. Then, how do we process other operations in this situation? Answer is Node JS cluster.
 
 
 
-# Q N A
 
 
 Q :
 
 Pada materi tampaknya operasi blocking and non-blocking telah tercampur.
-
 Akses jaringan, file dan database Non-blocking. Ini diperesentasi pada informasi sebaliknya
-
 Operasi algoritma berat terhambat pada process cpu (antrian).
 
 A: 
 
 Salah satu tujuan desain Node JS adalah "Tidak Ada Fungsi yang langsung melakukan operasi IO". 
-
 Mengapa? karena semua operasi dieksekusi dalam tumpukan eksekusi single thread cpu. 
-
 Itulah sebabnya Node JS menangani jenis operasi File IO, Network, Database secara asynchronous. 
-
 Faktanya setiap operasi di Node JS secara default asynchronous. Misalnya, Sistem Berkas. 
-
 Metode readFile() mengambil fungsi panggilan balik dan readFileSync() adalah operasi synchronous. 
-
 Saat Anda menjalankan operasi synchronous dalam tumpukan, kecuali jika operasi ini tidak selesai, 
-
 operasi tidak akan pernah dimulai dengan operasi kedua.
 
-
 Dalam pelajaran dan contoh saya, saya memberi tahu bahwa kami memiliki fungsi synchronous yang akan menghitung deret Fibonacci. 
-
 Jika jumlahnya kecil seperti 10,12, 13, operasi akan selesai dalam waktu singkat. 
-
 Tetapi jika kami memberikan angka yang lebih tinggi seperti 35, 40, 45, dibutuhkan banyak waktu di tumpukan eksekusi kami untuk memproses operasi ini. 
-
 Dan secara default Node JS menggunakan single threads dari mesin kami. Jadi, operasi yang berjalan lama akan memblokir main thread. 
-
 Di sinilah kita membutuhkan cluster Node JS.
 
-
 Jadi, singkatnya setiap operasi algoritma pemrosesan logika, dll. adalah operasi non-blocking. 
-
 Tetapi jika operasinya adalah operasi jaringan, disk, atau basis data, maka itu akan memblokir main thread. 
-
 Dan operasi ini membutuhkan jutaan siklus untuk diselesaikan. Itu sebabnya Node JS menjalankan semua operasi IO secara asynchronous.
 
-
 Namun, jika kita tetap menjalankan operasi non-blocking yaitu operasi terikat CPU yang membutuhkan waktu lama untuk diproses, 
-
 maka thread utama akan diblokir. Lalu, bagaimana kita memproses operasi lain dalam situasi ini? Jawabannya adalah cluster Node JS.
 
 
-
-
-
-
-
-# Regards,
-
-
-# Eki Indradi

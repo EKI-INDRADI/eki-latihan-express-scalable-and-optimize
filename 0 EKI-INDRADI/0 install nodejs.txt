@@ -1,6 +1,8 @@
 apt-get install curl
 curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
-sudo apt install nodejs
+apt-get update
+
+apt-get install nodejs
 
 node --version
 npm --version
