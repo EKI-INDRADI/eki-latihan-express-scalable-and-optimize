@@ -13,19 +13,19 @@
 # Q N A
 
 
-Question :
+
+
+# 1. Question :
 
 
 
 Pada materi tampaknya operasi blocking and non-blocking telah tercampur.
-
 Akses jaringan, file dan database Non-blocking. Ini diperesentasi pada informasi sebaliknya
-
 Operasi algoritma berat terhambat pada process cpu (antrian).
 
 
 
-Answer :
+# 1. Answer :
 
 
 
