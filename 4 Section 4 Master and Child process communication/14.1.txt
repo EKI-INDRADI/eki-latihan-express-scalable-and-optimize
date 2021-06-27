@@ -1,0 +1,8 @@
+nodemon server.js
+http://localhost:3000?number=20
+
+
+penggunaan cluster akan sangat bermanfaat jika menggunakan worker
+
+worker dsni adalah membuat proses nodejs menjadi synscronous bukan lagi asyncronous (antrian)
+yang artinya memanfaatkan threads yang tidak terpakai untuk handle proses yang sedang berlangsung

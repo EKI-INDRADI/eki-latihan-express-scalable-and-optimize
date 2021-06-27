@@ -13,11 +13,6 @@ class FibonacciSeries {
             s += 1;
             return (s);
         }
-		
-		if (number < 2) {
-            return 1;
-        }
-		
         else {
             return (this.calculateFibonacciValue(number - 1) + this.calculateFibonacciValue(number - 2));
         }

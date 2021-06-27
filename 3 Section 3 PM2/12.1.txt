@@ -1,0 +1,62 @@
+npm instal -g pm2
+
+cd /file_project_dir/
+
+pm2 ecosystem
+
+module.exports = {
+  apps : [{
+    name: 'Express App',
+    script: 'server.js',
+    instances: "MAX",
+    autorestart: true,
+    watch: true,
+    max_memory_restart: '1G',
+    env: {
+      NODE_ENV: 'development'
+    },
+    env_production: {
+      NODE_ENV: 'production'
+    }
+  }]
+};
+
+
+
+pm2 start ecosystem.config.js
+
+
+[PM2][WARN] Applications Express App not running, starting...
+[PM2] App [Express App] launched (4 instances)
+┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐
+│ id │ name               │ mode     │ ↺    │ status    │ cpu      │ memory   │
+├────┼────────────────────┼──────────┼──────┼───────────┼──────────┼──────────┤
+│ 0  │ Express App        │ cluster  │ 0    │ online    │ 0%       │ 36.8mb   │
+│ 1  │ Express App        │ cluster  │ 0    │ online    │ 0%       │ 36.9mb   │
+│ 2  │ Express App        │ cluster  │ 0    │ online    │ 0%       │ 36.7mb   │
+│ 3  │ Express App        │ cluster  │ 0    │ online    │ 0%       │ 34.5mb   │
+└────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
+
+pm2 stop all
+┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐
+│ id │ name               │ mode     │ ↺    │ status    │ cpu      │ memory   │
+├────┼────────────────────┼──────────┼──────┼───────────┼──────────┼──────────┤
+│ 0  │ Express App        │ cluster  │ 15   │ stopped   │ 0%       │ 0b       │
+│ 1  │ Express App        │ cluster  │ 15   │ stopped   │ 0%       │ 0b       │
+│ 2  │ Express App        │ cluster  │ 15   │ stopped   │ 0%       │ 0b       │
+│ 3  │ Express App        │ cluster  │ 15   │ stopped   │ 0%       │ 0b       │
+└────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
+pm2 start ecosystem.config.js
+┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐
+│ id │ name               │ mode     │ ↺    │ status    │ cpu      │ memory   │
+├────┼────────────────────┼──────────┼──────┼───────────┼──────────┼──────────┤
+│ 0  │ Express App        │ cluster  │ 15   │ online    │ 0%       │ 36.8mb   │
+│ 1  │ Express App        │ cluster  │ 15   │ online    │ 0%       │ 36.6mb   │
+│ 2  │ Express App        │ cluster  │ 15   │ online    │ 0%       │ 31.1mb   │
+│ 3  │ Express App        │ cluster  │ 15   │ online    │ 0%       │ 30.0mb   │
+└────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
+pm2 delete all
+┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐
+│ id │ name               │ mode     │ ↺    │ status    │ cpu      │ memory   │
+└────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
+
