@@ -1,0 +1,29 @@
+docker container exec -it rabbitmq_all /bin/sh
+
+rabbitmqctl list_queues
+-----
+Timeout: 60.0 seconds ...
+Listing queues for vhost / ...
+name    messages
+FabSeries2      0
+FabSeries1      1000
+-----
+
+
+pm2 start Worker1
+
+
+docker container exec -it rabbitmq_all /bin/sh
+rabbitmqctl list_queues
+------
+Timeout: 60.0 seconds ...
+Listing queues for vhost / ...
+name    messages
+FabSeries2      0
+FabSeries1      0
+------
+
+loadtest -n 1000 -c 100 --rps 100 http://localhost:3000?number=20
+
+docker container exec -it rabbitmq_all /bin/sh
+rabbitmqctl list_queues

@@ -1,0 +1,64 @@
+=================documentation===========
+docker run -d --hostname my-rabbit --name some-rabbit -p 8080:15672 rabbitmq:3.8-alpine
+=================documentation===========
+
+============================ EKI CONFIG ======================
+https://codeburst.io/get-started-with-rabbitmq-on-docker-4428d7f6e46b
+
+mkdir -p /home/docker_rnd/rabbitmq/etc
+chmod 777 -Rv /home/docker_rnd/rabbitmq
+cat > /home/docker_rnd/rabbitmq/etc/definitions.json
+cat > /home/docker_rnd/rabbitmq/etc/rabbitmq.conf
+cat > /home/docker_rnd/rabbitmq/data
+cat > /home/docker_rnd/rabbitmq/logs
+
+
+
+https://www.rabbitmq.com/configure.html
+nano /home/docker_rnd/rabbitmq/etc/rabbitmq.conf
+------------------------------
+loopback_users.guest = none   #none = enable remote  # true localhost only
+listeners.tcp.default = 5672
+management.listener.port = 15672
+management.listener.ssl = false
+management.load_definitions = /etc/rabbitmq/definitions.json
+------------------------------
+
+
+-------------------NOT USED-------------
+docker container create --name rabbitmq_15672_5672 \
+--restart always \
+-v /home/docker_rnd/rabbitmq/etc/definitions.json:/etc/rabbitmq/definitions.json \
+-v /home/docker_rnd/rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf \
+-v /home/docker_rnd/rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@my-rabbit \
+-v /home/docker_rnd/rabbitmq/logs:/var/log/rabbitmq/log \
+-p 15672:15672 \
+-p 5672:5672 \
+rabbitmq:3.8-alpine
+
+docker container start rabbitmq_15672_5672
+-------------------NOT USED-------------
+
+-------------------RECOMENDED-------------
+docker pull rabbitmq:3.8.18-management-alpine'
+docker container create --name rabbitmq_all \
+--restart always \
+-v /home/docker_rnd/rabbitmq/etc/definitions.json:/etc/rabbitmq/definitions.json \
+-v /home/docker_rnd/rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf \
+-v /home/docker_rnd/rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@my-rabbit \
+-v /home/docker_rnd/rabbitmq/logs:/var/log/rabbitmq/log \
+-p 15672:15672 \
+-p 5671:5671 \
+-p 5672:5672 \
+-p 4369:4369 \
+rabbitmq:3.8.18-management-alpine
+
+
+docker container start rabbitmq_all
+-------------------RECOMENDED-------------
+
+guest:guest
+
+ docker container exec -it rabbitmq_all /bin/sh
+
+============================ EKI CONFIG ======================

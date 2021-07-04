@@ -1,0 +1,8 @@
+pm2 start ecosystem.config.js 
+
+
+loadtest -n 1000 -c 100 --rps 100 http://localhost:3000?number=20
+
+
+
+pm2 monit
