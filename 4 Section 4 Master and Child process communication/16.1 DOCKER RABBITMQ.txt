@@ -59,6 +59,6 @@ docker container start rabbitmq_all
 
 guest:guest
 
- docker container exec -it rabbitmq_all /bin/sh
-
+docker container exec -it rabbitmq_all /bin/sh
+rabbitmqctl list_queues
 ============================ EKI CONFIG ======================
